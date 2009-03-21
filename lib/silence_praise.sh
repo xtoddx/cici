@@ -1,0 +1,3 @@
+function praise() {
+  echo -n ''
+}

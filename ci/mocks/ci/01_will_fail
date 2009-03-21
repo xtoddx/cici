@@ -1,0 +1,5 @@
+function return_failure() {
+  return 1
+}
+
+return_failure

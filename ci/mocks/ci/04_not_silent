@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+. $CI_ROOT/lib/functions.sh 
+
+function invoke_missing_test() {
+  ocst=(${can_skip_tasks[@]})
+  can_skip_tasks=( "XX_missing_test" )
+  invoke "XX_missing_test"
+  can_skip_tasks=( ${ocst[@]} )
+}
+
+invoke_missing_test

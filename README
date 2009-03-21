@@ -1,0 +1,11 @@
+Continuity Interruption (CI) is a Continuous Integration (CI) tool.
+
+Give it a list of directories in a configuration.  Each directory should
+be a part of the project to test.  Each directory should have a subdirectory
+named 'ci' with files 'update', 'prepare', and 'test'.  CI will run these
+scripts to prepare you application for test and test it.
+
+The return values from the scripts in the ci directory should be zero unless
+and error occurs.
+
+Reporting (success or error) is doine via the 'report' script.

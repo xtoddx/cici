@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+. $CI_ROOT/lib/functions.sh 
+
+function invoke_passing_test() {
+  invoke '03_passing_test'
+}
+
+invoke_passing_test

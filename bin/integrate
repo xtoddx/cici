@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+if [ ! -d "ci" ] ; then
+  echo "`basename $0` must be run from where there is a 'ci' directory"
+  exit
+fi
+
+function set_ci_root() {
+  local x=`dirname $0`
+  local p=`pwd`
+  x=`echo $x | sed -e 's/^\./${p}/'`
+  export CI_ROOT=`dirname ${x}`
+}
+
+set_ci_root
+. "${CI_ROOT}/lib/functions.sh"
+. "${CI_ROOT}/lib/default_options.sh"
+
+if [ -f "ci/config.sh" ] ; then
+  . "ci/config.sh"
+fi
+
+index=0
+while [ $index -lt ${#tasks[@]} ]  ; do
+  invoke ${tasks[$index]}
+  let index=index+1
+done
+
+report_success

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function return_if_has_ci_root() {
+  if [ $CI_ROOT ] ; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+return_if_has_ci_root

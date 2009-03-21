@@ -1,0 +1,10 @@
+function return_has_no_functions() {
+  invoke 2> /dev/null
+  if [ $? -eq 127 ] ; then
+    return 0
+  end
+    return 1
+  fi
+}
+
+return_has_no_functions
