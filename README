@@ -1,11 +1,29 @@
-Continuity Interruption (CI) is a Continuous Integration (CI) tool.
+Continuous Integration Continuously Integrates (cici)
 
-Give it a list of directories in a configuration.  Each directory should
-be a part of the project to test.  Each directory should have a subdirectory
-named 'ci' with files 'update', 'prepare', and 'test'.  CI will run these
-scripts to prepare you application for test and test it.
+Run for a location where thre is a 'ci' directory.  This starts your tests.
 
-The return values from the scripts in the ci directory should be zero unless
-and error occurs.
+The 'ci' directory should have executables for running tests.  You can edit
+config.sh to let it know what to run, and in what order ($tasks).  Each
+executable cici runs during the test process should return zero on success.
 
-Reporting (success or error) is doine via the 'report' script.
+The standard workflow is: update, prepare, test, doc, cleanup
+Where update gets the latest revision, prepare sets up your test harness,
+test runs all the tests, doc creates documentation, and cleanup removes
+your test data for a pristine environment.
+
+Some tasks can be skipped ($can_skip_tasks).  By default these are prepare,
+doc, and cleanup.
+
+You can specify that some tasks failing shouldn't report failure for the
+build ($can_fail_tasks).  By default this is doc and cleanup.
+
+You can also specify what tasks are finalizers, to be run regardless of
+any failure farther up the chain ($final_tasks).  By default this is cleanup.
+Any task in the finalizers should also be in the can_fail list, so that it
+doesn't recurse infinitely.
+
+cici is used to test itself. So just peer into the ci directory to see how
+it can be set up.
+
+For a rails app, just create a update script that runs 'git pull' and a test
+script that runs 'rake'.
