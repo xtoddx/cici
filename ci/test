@@ -2,7 +2,7 @@
 
 . $CI_ROOT/lib/functions.sh
 . $CI_ROOT/lib/subtask_invoker.sh
-#. $CI_ROOT/lib/silence_praise.sh
+. $CI_ROOT/lib/silence_praise.sh
 
 subtasks=(`ls ci/tests | sort`)
 
