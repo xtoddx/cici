@@ -6,7 +6,11 @@ if [ ! -d "ci" ] ; then
 fi
 
 function set_ci_root() {
-  local x=`dirname $0`
+  # dereference possible symlink (use $NF instead of $2 in case it isn't a link)
+  # will always be quoted, so sed script is okay
+  local l=`stat -c "%N" ${0} | awk -F' -> ' '{print $NF}' | sed -e s/^.// -e s/.$//`
+  local x=`dirname ${l}`
+
   local p=`pwd`
   x=`echo $x | sed -e 's/^\./${p}/'`
   export CI_ROOT=`dirname ${x}`
